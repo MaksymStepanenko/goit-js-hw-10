@@ -24,9 +24,9 @@ function onInput(e) {
   let name = '';
   name = e.target.value.trim();
   if (name.length === 0) {
+    refs.countryInfo.innerHTML = '';
+    refs.countryList.innerHTML = '';
     return
-    // refs.countryInfo.innerHTML = '';
-    // refs.countryList.innerHTML = '';
   }
 
   fetchCountries(name)

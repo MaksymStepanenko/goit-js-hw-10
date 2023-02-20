@@ -3,21 +3,11 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
 
-
+import fetchCountries from './fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
 
-function fetchCountries(name) {
-  return fetch(
-    `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`
-  ).then(res => 
-  {
-      if (!res.ok)
-      {
-    throw new Error('Oops, there is no country with that name.');
-  }
-  return res.json()});
-}
+
 
 const refs = {
   input: document.getElementById('search-box'),
@@ -34,8 +24,9 @@ function onInput(e) {
   let name = '';
   name = e.target.value.trim();
   if (name.length === 0) {
-    refs.countryInfo.innerHTML = '';
-    refs.countryList.innerHTML = '';
+    return
+    // refs.countryInfo.innerHTML = '';
+    // refs.countryList.innerHTML = '';
   }
 
   fetchCountries(name)
